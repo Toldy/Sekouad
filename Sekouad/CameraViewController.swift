@@ -34,9 +34,10 @@ class CameraViewController: UIViewController {
         blurredEffectView.effect = UIBlurEffect(style: UIBlurEffectStyle.dark)
         blurredEffectView.alpha = 0
         swapButton.addShadow()
-        let notificationName = Notification.Name("TakePicture")
+
         // Register to receive notification
-        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.capturePicture), name: notificationName, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.capturePicture), name: SekouadeNotification.takePicture.rawValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.recordVideo), name: SekouadeNotification.record.rawValue, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -96,6 +97,21 @@ class CameraViewController: UIViewController {
     }
     
     func capturePicture() {
+        let captureSettings = AVCapturePhotoSettings()
+        if let videoConnection = dataOutput!.connection(withMediaType: AVMediaTypeVideo) {
+            dataOutput!.capturePhoto(with: captureSettings, delegate: self)
+        }
+    }
+    
+    func recordVideo() {
+        guard let targetPage = notification.userInfo!["action"] as? Int else { return }
+        
+        if action == "start" {
+            dataOutput.st
+        } else if action == "stop" {
+            
+        }
+        
         let captureSettings = AVCapturePhotoSettings()
         if let videoConnection = dataOutput!.connection(withMediaType: AVMediaTypeVideo) {
             dataOutput!.capturePhoto(with: captureSettings, delegate: self)

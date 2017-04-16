@@ -10,6 +10,7 @@ import UIKit
 
 enum SekouadeNotification {
     case takePicture
+    case record
     case goTo
     
     typealias RawValue = Notification.Name
@@ -17,6 +18,8 @@ enum SekouadeNotification {
         switch self {
         case .takePicture:
             return Notification.Name("TakePicture")
+        case .record:
+            return Notification.Name("Record")
         case .goTo:
             return Notification.Name("HomePanel.GoTo")
         }
@@ -33,9 +36,19 @@ class RootViewController: UIViewController {
         super.viewDidLoad()
 
         recordButton.addShadow()
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(RootViewController.mainButtonTouchAction))  //Tap function will call when user tap on button
+        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(RootViewController.mainButtonLongPressAction(_:))) //Long function will call when user long press on button.
+        tapGesture.numberOfTapsRequired = 1
+        recordButton.addGestureRecognizer(tapGesture)
+        recordButton.addGestureRecognizer(longGesture)
     }
     
-    @IBAction func recordAction(_ sender: Any) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        homePageViewController = segue.destination as? HomePageViewController
+    }
+    
+    @IBAction func mainButtonTouchAction() {
         // If current view is camera: Take picture
         if homePageViewController?.currentIndex == 0 {
             NotificationCenter.default.post(name: SekouadeNotification.takePicture.rawValue,
@@ -46,7 +59,15 @@ class RootViewController: UIViewController {
                                             object: nil, userInfo: ["page": 0])
         }
     }
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        homePageViewController = segue.destination as? HomePageViewController
+    
+    @IBAction func mainButtonLongPressAction(_ sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            NotificationCenter.default.post(name: SekouadeNotification.takePicture.rawValue,
+                                            object: nil, userInfo: ["action": "start"])
+        }
+        else if sender.state == .ended {
+            NotificationCenter.default.post(name: SekouadeNotification.takePicture.rawValue,
+                                            object: nil, userInfo: ["action": "stop"])
+        }
     }
 }
