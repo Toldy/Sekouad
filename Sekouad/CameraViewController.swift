@@ -123,16 +123,31 @@ class CameraViewController: UIViewController {
         } else if action == "stop" {
             videoFileOutput?.stopRecording()
         }
-        
-        let captureSettings = AVCapturePhotoSettings()
-        if let videoConnection = dataOutput!.connection(withMediaType: AVMediaTypeVideo) {
-            dataOutput!.capturePhoto(with: captureSettings, delegate: self)
-        }
+    }
+    
+    @IBOutlet weak var resultView: UIView!
+    @IBOutlet weak var resultImageView: UIImageView!
+
+    fileprivate func viewController(withName name: String) -> UIViewController {
+        return UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: name)
+    }
+    
+    func displayResult(_ contentType:  CameraResultViewController.ContentType) {
+        let resultVC = self.viewController(withName: "CameraResultViewControllerId") as! CameraResultViewController
+        resultVC.modalTransitionStyle = .crossDissolve
+        resultVC.contentType = contentType
+        self.present(resultVC, animated: true, completion: nil)
     }
 }
 
 extension CameraViewController: AVCapturePhotoCaptureDelegate {
-    func capture(_ captureOutput: AVCapturePhotoOutput, didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?, previewPhotoSampleBuffer: CMSampleBuffer?, resolvedSettings: AVCaptureResolvedPhotoSettings, bracketSettings: AVCaptureBracketedStillImageSettings?, error: Error?) {
+    
+    func capture(_ captureOutput: AVCapturePhotoOutput,
+                 didFinishProcessingPhotoSampleBuffer photoSampleBuffer: CMSampleBuffer?,
+                 previewPhotoSampleBuffer: CMSampleBuffer?,
+                 resolvedSettings: AVCaptureResolvedPhotoSettings,
+                 bracketSettings: AVCaptureBracketedStillImageSettings?,
+                 error: Error?) {
         if error != nil {
             print("ERROR", error)
             return
@@ -142,45 +157,18 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
             let data = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!,
                                                                         previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             let image = UIImage(data: data!)
-            UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+            displayResult(.photo(image: image!))
         }
     }
 }
 
 extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
-    func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
-        print("capture did finish")
-        print(captureOutput)
-        print(outputFileURL)
-        playVideo(outputFileURL)
-        if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outputFileURL.path) {
-            UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, self, #selector(CameraViewController.video(videoPath:didFinishSavingWithError:contextInfo:)), nil)
-        }
-    }
     
-    func playVideo(_ url: URL){
-        let f = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-        
-        let player = AVPlayer(url: url)
-        let playerLayer = AVPlayerLayer(player: player)
-        playerLayer.frame = f
-        playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
-        
-        self.view.layer.addSublayer(playerLayer)
-        
-        DispatchQueue.main.async {
-            player.play()
-        }
-        
-    }
-    
-    func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject)
-    {
-        if let _ = error {
-            print("Error,Video failed to save")
-        }else{
-            print("Successfully,Video was saved")
-        }
+    func capture(_ captureOutput: AVCaptureFileOutput!,
+                 didFinishRecordingToOutputFileAt outputFileURL: URL!,
+                 fromConnections connections: [Any]!,
+                 error: Error!) {
+        displayResult(.video(url: outputFileURL))
     }
 }
 

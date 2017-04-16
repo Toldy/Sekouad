@@ -60,6 +60,7 @@
                     </connections>
                 </pongPressGestureRecognizer>
             </objects>
+            <point key="canvasLocation" x="964" y="-684"/>
         </scene>
         <!--Home Page View Controller-->
         <scene sceneID="WUl-Tt-cfN">
@@ -96,13 +97,19 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EtU-g3-ANr" userLabel="Result View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
                             <constraint firstItem="reH-wk-G8A" firstAttribute="height" secondItem="eCn-gS-5eY" secondAttribute="height" id="19D-GO-vHo"/>
                             <constraint firstItem="reH-wk-G8A" firstAttribute="width" secondItem="eCn-gS-5eY" secondAttribute="width" id="AbX-l0-76w"/>
+                            <constraint firstItem="EtU-g3-ANr" firstAttribute="centerX" secondItem="reH-wk-G8A" secondAttribute="centerX" id="Bal-U5-9rf"/>
                             <constraint firstAttribute="trailing" secondItem="eCn-gS-5eY" secondAttribute="trailing" id="Dwg-cr-rqy"/>
+                            <constraint firstItem="EtU-g3-ANr" firstAttribute="centerY" secondItem="reH-wk-G8A" secondAttribute="centerY" id="I63-v1-Irf"/>
                             <constraint firstItem="eCn-gS-5eY" firstAttribute="top" secondItem="Wgp-uk-cim" secondAttribute="top" id="UNt-go-wez"/>
                             <constraint firstItem="reH-wk-G8A" firstAttribute="centerX" secondItem="eCn-gS-5eY" secondAttribute="centerX" id="WFj-T2-Ssj"/>
                             <constraint firstItem="MLm-cB-QGE" firstAttribute="leading" secondItem="Wgp-uk-cim" secondAttribute="leadingMargin" id="YFX-sz-XwS"/>
@@ -110,6 +117,8 @@
                             <constraint firstItem="eCn-gS-5eY" firstAttribute="leading" secondItem="Wgp-uk-cim" secondAttribute="leading" id="hoT-jv-ij5"/>
                             <constraint firstItem="MLm-cB-QGE" firstAttribute="top" secondItem="zPn-RN-ErY" secondAttribute="bottom" constant="20" id="hvl-uz-WD0"/>
                             <constraint firstItem="reH-wk-G8A" firstAttribute="centerY" secondItem="eCn-gS-5eY" secondAttribute="centerY" id="jmo-Qp-MEQ"/>
+                            <constraint firstItem="EtU-g3-ANr" firstAttribute="height" secondItem="reH-wk-G8A" secondAttribute="height" id="pe0-v4-SMF"/>
+                            <constraint firstItem="EtU-g3-ANr" firstAttribute="width" secondItem="reH-wk-G8A" secondAttribute="width" id="zdb-mh-JKW"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="lde-5P-gwg" appends="YES" id="63O-8T-faB"/>
@@ -119,6 +128,8 @@
                     <connections>
                         <outlet property="blurredEffectView" destination="eCn-gS-5eY" id="TQi-jD-QPA"/>
                         <outlet property="cameraView" destination="reH-wk-G8A" id="E4T-3V-Ys9"/>
+                        <outlet property="resultImageView" destination="dwg-c6-aSW" id="lda-6i-ALy"/>
+                        <outlet property="resultView" destination="EtU-g3-ANr" id="mjj-4M-6Kj"/>
                         <outlet property="swapButton" destination="MLm-cB-QGE" id="oYQ-yh-bEs"/>
                     </connections>
                 </viewController>
@@ -130,6 +141,77 @@
                 </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1993" y="-201"/>
+        </scene>
+        <!--Camera Result View Controller-->
+        <scene sceneID="J7Q-X1-RNL">
+            <objects>
+                <viewController storyboardIdentifier="CameraResultViewControllerId" id="JIG-Ah-CyP" customClass="CameraResultViewController" customModule="Sekouad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="gYn-fW-wgh"/>
+                        <viewControllerLayoutGuide type="bottom" id="ea6-Tw-yor"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EZg-Vl-SAu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rotate" translatesAutoresizingMaskIntoConstraints="NO" id="dwg-c6-aSW">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sQp-39-rDb" userLabel="Result Video View">
+                                <rect key="frame" x="-0.5" y="-0.5" width="375" height="667"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5oQ-7o-6gx">
+                                <rect key="frame" x="16" y="20" width="29" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="29" id="V5l-Lq-Zdr"/>
+                                    <constraint firstAttribute="width" secondItem="5oQ-7o-6gx" secondAttribute="height" multiplier="1:1" id="ZUF-kJ-6pB"/>
+                                </constraints>
+                                <state key="normal" image="cancel-music"/>
+                                <connections>
+                                    <action selector="closeAction:" destination="JIG-Ah-CyP" eventType="touchUpInside" id="aJi-CU-QgL"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TdU-dY-T0E">
+                                <rect key="frame" x="16" y="618" width="29" height="29"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="TdU-dY-T0E" secondAttribute="height" multiplier="1:1" id="EHS-wB-2pa"/>
+                                    <constraint firstAttribute="width" constant="29" id="UrJ-5t-wa5"/>
+                                </constraints>
+                                <state key="normal" image="download-folder"/>
+                                <connections>
+                                    <action selector="downloadAction:" destination="JIG-Ah-CyP" eventType="touchUpInside" id="IDk-Wb-Jai"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="5oQ-7o-6gx" firstAttribute="top" secondItem="gYn-fW-wgh" secondAttribute="bottom" constant="20" id="5Ku-wS-cDo"/>
+                            <constraint firstItem="dwg-c6-aSW" firstAttribute="leading" secondItem="EZg-Vl-SAu" secondAttribute="leading" id="CPR-FK-CDG"/>
+                            <constraint firstItem="sQp-39-rDb" firstAttribute="centerX" secondItem="dwg-c6-aSW" secondAttribute="centerX" id="GAU-AQ-mbg"/>
+                            <constraint firstItem="dwg-c6-aSW" firstAttribute="top" secondItem="gYn-fW-wgh" secondAttribute="bottom" id="GoN-ai-WeT"/>
+                            <constraint firstItem="TdU-dY-T0E" firstAttribute="leading" secondItem="EZg-Vl-SAu" secondAttribute="leadingMargin" id="HQQ-W3-dab"/>
+                            <constraint firstItem="TdU-dY-T0E" firstAttribute="width" secondItem="TdU-dY-T0E" secondAttribute="height" multiplier="1:1" id="Xr9-pK-zRr"/>
+                            <constraint firstItem="sQp-39-rDb" firstAttribute="centerY" secondItem="dwg-c6-aSW" secondAttribute="centerY" id="XvU-ax-a3n"/>
+                            <constraint firstAttribute="trailing" secondItem="dwg-c6-aSW" secondAttribute="trailing" id="YRd-Rh-jLu"/>
+                            <constraint firstItem="ea6-Tw-yor" firstAttribute="top" secondItem="TdU-dY-T0E" secondAttribute="bottom" constant="20" id="ZQy-vq-b6M"/>
+                            <constraint firstItem="sQp-39-rDb" firstAttribute="width" secondItem="dwg-c6-aSW" secondAttribute="width" id="e3M-BE-2Wv"/>
+                            <constraint firstAttribute="bottom" secondItem="dwg-c6-aSW" secondAttribute="bottom" id="krw-3t-bVL"/>
+                            <constraint firstItem="sQp-39-rDb" firstAttribute="height" secondItem="dwg-c6-aSW" secondAttribute="height" id="pmL-6k-o8I"/>
+                            <constraint firstItem="5oQ-7o-6gx" firstAttribute="leading" secondItem="EZg-Vl-SAu" secondAttribute="leadingMargin" id="vKH-zE-WVb"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedStatusBarMetrics"/>
+                    <connections>
+                        <outlet property="closeButton" destination="5oQ-7o-6gx" id="VqQ-va-MIg"/>
+                        <outlet property="downloadButton" destination="TdU-dY-T0E" id="aI7-As-rWb"/>
+                        <outlet property="resultImageView" destination="dwg-c6-aSW" id="iVa-36-Cgu"/>
+                        <outlet property="resultVideoView" destination="sQp-39-rDb" id="87q-gZ-NbJ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JTw-aU-ngu" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2833" y="-201"/>
         </scene>
         <!--Timeline View Controller-->
         <scene sceneID="xCe-ce-pIL">
@@ -368,7 +450,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="cancel-music" width="29" height="29"/>
         <image name="circle-outline" width="50" height="50"/>
+        <image name="download-folder" width="29" height="30"/>
         <image name="footer-bottom" width="40" height="20"/>
         <image name="header-top" width="40" height="20"/>
         <image name="more" width="8" height="29"/>
