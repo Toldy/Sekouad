@@ -28,6 +28,10 @@ class HomePageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
+        view.subviews
+            .flatMap { $0 as? UIScrollView }
+            .first?.delegate = self
+        
         // Listen for page change notification
         NotificationCenter.default.addObserver(self, selector: #selector(HomePageViewController.goToPageNotificationHandler(_:)),
                                                name: SekouadeNotification.goTo.rawValue, object: nil)
@@ -42,8 +46,10 @@ class HomePageViewController: UIPageViewController {
         guard let targetPage = notification.userInfo!["page"] as? Int else { return }
         
         if targetPage == 0 {
-            setViewControllers([orderedViewControllers.first!], direction: .reverse, animated: true, completion: nil)
-            currentIndex = 0
+            DispatchQueue.main.async {
+                self.currentIndex = 0
+                self.setViewControllers([self.orderedViewControllers.first!], direction: .reverse, animated: false, completion: nil)
+            }
         }
     }
 
@@ -106,4 +112,40 @@ extension HomePageViewController: UIPageViewControllerDelegate {
         }
         nextIndex = 0
     }
+}
+
+extension HomePageViewController: UIScrollViewDelegate {
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width {
+            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+        } else if currentIndex == orderedViewControllers.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width {
+            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+        } else {
+            
+            if currentIndex == 0 {
+                let camera = orderedViewControllers.first! as! CameraViewController
+                var frame = camera.view.frame
+                frame.origin.x = scrollView.contentOffset.x - scrollView.bounds.size.width
+                camera.view.frame = frame
+                
+                                var percentage = frame.origin.x / scrollView.bounds.size.width
+//                                camera.blurredBackgroundView.alpha = percentage
+                //                print(percentage)
+            } else {
+                var frame = orderedViewControllers.first!.view.frame
+                frame.origin.x = scrollView.contentOffset.x
+                orderedViewControllers.first!.view.frame = frame
+            }
+        }
+    }
+    
+    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        if currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width {
+            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+        } else if currentIndex == orderedViewControllers.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width {
+            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+        }
+    }
+    
 }

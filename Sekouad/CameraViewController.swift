@@ -12,7 +12,9 @@ import AVFoundation
 class CameraViewController: UIViewController {
     
     @IBOutlet weak var swapButton: UIButton!
-
+    @IBOutlet weak var blurredEffectView: UIVisualEffectView!
+    @IBOutlet weak var cameraView: UIView!
+    
     private var captureDevicePosition = AVCaptureDevicePosition.front
 
     @IBAction func swapAction(_ sender: Any) {
@@ -29,7 +31,8 @@ class CameraViewController: UIViewController {
         super.viewDidLoad()
         setupCameraSession()
         
-        
+        blurredEffectView.effect = UIBlurEffect(style: UIBlurEffectStyle.dark)
+        blurredEffectView.alpha = 0
         swapButton.addShadow()
         let notificationName = Notification.Name("TakePicture")
         // Register to receive notification
@@ -39,7 +42,7 @@ class CameraViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        view.layer.insertSublayer(previewLayer, below: swapButton.layer)
+        cameraView.layer.addSublayer(previewLayer)
         
         cameraSession.startRunning()
     }

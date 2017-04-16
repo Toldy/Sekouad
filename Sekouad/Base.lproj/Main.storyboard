@@ -78,6 +78,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="reH-wk-G8A" userLabel="Camera View">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eCn-gS-5eY" customClass="UIVisualEffectView">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MLm-cB-QGE">
                                 <rect key="frame" x="16" y="20" width="50" height="26"/>
                                 <state key="normal" image="rotate"/>
@@ -86,11 +94,19 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="reH-wk-G8A" firstAttribute="height" secondItem="eCn-gS-5eY" secondAttribute="height" id="19D-GO-vHo"/>
+                            <constraint firstItem="reH-wk-G8A" firstAttribute="width" secondItem="eCn-gS-5eY" secondAttribute="width" id="AbX-l0-76w"/>
+                            <constraint firstAttribute="trailing" secondItem="eCn-gS-5eY" secondAttribute="trailing" id="Dwg-cr-rqy"/>
+                            <constraint firstItem="eCn-gS-5eY" firstAttribute="top" secondItem="Wgp-uk-cim" secondAttribute="top" id="UNt-go-wez"/>
+                            <constraint firstItem="reH-wk-G8A" firstAttribute="centerX" secondItem="eCn-gS-5eY" secondAttribute="centerX" id="WFj-T2-Ssj"/>
                             <constraint firstItem="MLm-cB-QGE" firstAttribute="leading" secondItem="Wgp-uk-cim" secondAttribute="leadingMargin" id="YFX-sz-XwS"/>
+                            <constraint firstAttribute="bottom" secondItem="eCn-gS-5eY" secondAttribute="bottom" id="dV7-Nl-W1Y"/>
+                            <constraint firstItem="eCn-gS-5eY" firstAttribute="leading" secondItem="Wgp-uk-cim" secondAttribute="leading" id="hoT-jv-ij5"/>
                             <constraint firstItem="MLm-cB-QGE" firstAttribute="top" secondItem="zPn-RN-ErY" secondAttribute="bottom" constant="20" id="hvl-uz-WD0"/>
+                            <constraint firstItem="reH-wk-G8A" firstAttribute="centerY" secondItem="eCn-gS-5eY" secondAttribute="centerY" id="jmo-Qp-MEQ"/>
                         </constraints>
                         <connections>
                             <outletCollection property="gestureRecognizers" destination="lde-5P-gwg" appends="YES" id="63O-8T-faB"/>
@@ -98,6 +114,8 @@
                     </view>
                     <nil key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="blurredEffectView" destination="eCn-gS-5eY" id="TQi-jD-QPA"/>
+                        <outlet property="cameraView" destination="reH-wk-G8A" id="E4T-3V-Ys9"/>
                         <outlet property="swapButton" destination="MLm-cB-QGE" id="oYQ-yh-bEs"/>
                     </connections>
                 </viewController>
@@ -266,7 +284,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="aAQ-rK-4vW" firstAttribute="top" secondItem="rdY-RF-ONg" secondAttribute="bottom" id="G5e-GZ-lKm"/>
                             <constraint firstItem="rdY-RF-ONg" firstAttribute="top" secondItem="TDF-xi-CIl" secondAttribute="top" id="bCh-s4-Vft"/>
@@ -328,7 +346,7 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="PBu-Tf-2Jf" firstAttribute="top" secondItem="PgI-Rq-pLb" secondAttribute="top" constant="20" id="DeT-fr-xqY"/>
                         <constraint firstItem="PBu-Tf-2Jf" firstAttribute="leading" secondItem="PgI-Rq-pLb" secondAttribute="leading" id="IC8-El-blH"/>
