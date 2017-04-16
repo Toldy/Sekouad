@@ -28,11 +28,22 @@ class HomePageViewController: UIPageViewController {
         dataSource = self
         delegate = self
         
+        // Listen for page change notification
+        NotificationCenter.default.addObserver(self, selector: #selector(HomePageViewController.goToPageNotificationHandler(_:)),
+                                               name: SekouadeNotification.goTo.rawValue, object: nil)
+
         // Set initial page(viewcontroller)
         if let firstViewController = orderedViewControllers.first {
-            setViewControllers([firstViewController], direction: .forward, animated: true, completion: { (boo) in
-                print("set initial ViewController ✅")
-            })
+            setViewControllers([firstViewController], direction: .forward, animated: true, completion: nil)
+        }
+    }
+    
+    func goToPageNotificationHandler(_ notification: NSNotification) {
+        guard let targetPage = notification.userInfo!["page"] as? Int else { return }
+        
+        if targetPage == 0 {
+            setViewControllers([orderedViewControllers.first!], direction: .reverse, animated: true, completion: nil)
+            currentIndex = 0
         }
     }
 

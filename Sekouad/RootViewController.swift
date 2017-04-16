@@ -8,28 +8,45 @@
 
 import UIKit
 
+enum SekouadeNotification {
+    case takePicture
+    case goTo
+    
+    typealias RawValue = Notification.Name
+    var rawValue: RawValue {
+        switch self {
+        case .takePicture:
+            return Notification.Name("TakePicture")
+        case .goTo:
+            return Notification.Name("HomePanel.GoTo")
+        }
+    }
+}
+
 class RootViewController: UIViewController {
+
+    @IBOutlet weak var recordButton: UIButton!
+    
+    private var homePageViewController: HomePageViewController?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        recordButton.addShadow()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func recordAction(_ sender: Any) {
+        // If current view is camera: Take picture
+        if homePageViewController?.currentIndex == 0 {
+            NotificationCenter.default.post(name: SekouadeNotification.takePicture.rawValue,
+                                            object: nil)
+        } else {
+            // Else slide to camera view
+            NotificationCenter.default.post(name: SekouadeNotification.goTo.rawValue,
+                                            object: nil, userInfo: ["page": 0])
+        }
     }
-    */
-
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        homePageViewController = segue.destination as? HomePageViewController
+    }
 }
