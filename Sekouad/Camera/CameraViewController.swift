@@ -24,7 +24,6 @@ class CameraViewController: UIViewController {
     private func swapCameraOrientation() {
         captureDevicePosition = captureDevicePosition == .front ? .back : .front
         setupCameraSession()
-        
     }
     
     override func viewDidLoad() {
@@ -36,8 +35,10 @@ class CameraViewController: UIViewController {
         swapButton.addShadow()
 
         // Register to receive notification
-        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.capturePicture), name: SekouadeNotification.takePicture.rawValue, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.recordVideo), name: SekouadeNotification.record.rawValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.capturePicture),
+                                               name: SekouadeNotification.takePicture.rawValue, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(CameraViewController.recordVideo),
+                                               name: SekouadeNotification.record.rawValue, object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -139,7 +140,7 @@ class CameraViewController: UIViewController {
     }
     
     func displayResult(_ contentType:  CameraResultViewController.ContentType) {
-        let resultVC = self.viewController(withName: "CameraResultViewControllerId") as! CameraResultViewController
+        let resultVC: CameraResultViewController = UIViewController.instantiate(withIdentifier: "CameraResultViewControllerId")
         resultVC.modalTransitionStyle = .crossDissolve
         resultVC.contentType = contentType
         self.present(resultVC, animated: true, completion: nil)
@@ -176,17 +177,5 @@ extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
                  fromConnections connections: [Any]!,
                  error: Error!) {
         displayResult(.video(url: outputFileURL))
-    }
-}
-
-
-extension UIView {
-    
-    func addShadow() {
-        layer.shadowColor = UIColor.black.cgColor
-        layer.shadowOffset = CGSize(width: 0, height: 0)
-        layer.shadowOpacity = 0.5
-        layer.shadowRadius = 3
-        clipsToBounds = false
     }
 }

@@ -8,30 +8,6 @@
 
 import UIKit
 
-class Sekouad {
-    var title: String
-    var lastUpdate: String
-    var emoji: String
-    var thumbnail: String?
-    
-    init(title: String, lastUpdate: String, emoji: String, thumbnail: Int) {
-        self.title = title
-        self.lastUpdate = lastUpdate
-        self.emoji = emoji
-        self.thumbnail = "thumbnail-\(thumbnail)"
-    }
-}
-
-class TimelineModel {
-    
-    let sections = ["Perso", "Récents", "Populaires"]
-    let sekouads = [
-        [Sekouad(title: "BritneyFans", lastUpdate: "5 min", emoji: "👯", thumbnail: 1), Sekouad(title: "PTDR", lastUpdate: "9 min", emoji: "😂", thumbnail: 2)],
-        [Sekouad(title: "Wonderboys", lastUpdate: "5 min", emoji: "🦄", thumbnail: 1), Sekouad(title: "Devildu92", lastUpdate: "9 min", emoji: "😵", thumbnail: 2), Sekouad(title: "Avocado", lastUpdate: "1 h", emoji: "🥑", thumbnail: 3)],
-        [Sekouad(title: "BlueTeam", lastUpdate: "1 h", emoji: "🥑", thumbnail: 4), Sekouad(title: "Oreo", lastUpdate: "5 min", emoji: "🍿", thumbnail: 4), Sekouad(title: "Fitness", lastUpdate: "23 h", emoji: "💪", thumbnail: 1)]
-    ]
-}
-
 class HeaderView: UIView {
     @IBOutlet var titleLabel: UILabel!
 }
@@ -42,7 +18,7 @@ class TimelineViewController: UIViewController {
     @IBOutlet var footerView: UIView!
     @IBOutlet var headerView: HeaderView!
 
-    let model = TimelineModel()
+    let model = TimelineFakeModel()
     
     @IBAction func addSekouad(_ sender: Any) {
         print("addSekouad")
@@ -95,14 +71,5 @@ extension TimelineViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         return footerView.copyView()
-    }
-}
-
-//MARK: - UIView Extensions
-
-extension UIView {
-    
-    func copyView<T: UIView>() -> T {
-        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
     }
 }

@@ -8,24 +8,6 @@
 
 import UIKit
 
-enum SekouadeNotification {
-    case takePicture
-    case record
-    case goTo
-    
-    typealias RawValue = Notification.Name
-    var rawValue: RawValue {
-        switch self {
-        case .takePicture:
-            return Notification.Name("TakePicture")
-        case .record:
-            return Notification.Name("Record")
-        case .goTo:
-            return Notification.Name("HomePanel.GoTo")
-        }
-    }
-}
-
 class RootViewController: UIViewController {
 
     @IBOutlet weak var recordButton: UIButton!
@@ -37,8 +19,10 @@ class RootViewController: UIViewController {
 
         recordButton.addShadow()
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(RootViewController.mainButtonTouchAction))  //Tap function will call when user tap on button
-        let longGesture = UILongPressGestureRecognizer(target: self, action: #selector(RootViewController.mainButtonLongPressAction(_:))) //Long function will call when user long press on button.
+        let tapGesture = UITapGestureRecognizer(target: self,
+                                                action: #selector(RootViewController.mainButtonTouchAction))
+        let longGesture = UILongPressGestureRecognizer(target: self,
+                                                       action: #selector(RootViewController.mainButtonLongPressAction(_:)))
         tapGesture.numberOfTapsRequired = 1
         recordButton.addGestureRecognizer(tapGesture)
         recordButton.addGestureRecognizer(longGesture)

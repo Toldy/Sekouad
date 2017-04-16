@@ -78,11 +78,12 @@ class CameraResultViewController: UIViewController {
 
 extension CameraResultViewController {
     
+    // Display a toast instead
     func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject) {
-        if let _ = error {
-            print("Error,Video failed to save")
+        if let e = error {
+            print("Video saving error: \(e)")
         } else {
-            print("Successfully,Video was saved")
+            print("Video Successfully saved !")
         }
     }
     

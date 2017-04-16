@@ -17,21 +17,27 @@
 		6649AA021EA364250000A28C /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA011EA364250000A28C /* TimelineViewController.swift */; };
 		6649AA041EA378730000A28C /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA031EA378730000A28C /* TimelineTableViewCell.swift */; };
 		6649AA061EA3DE6C0000A28C /* CameraResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA051EA3DE6C0000A28C /* CameraResultViewController.swift */; };
+		6649AA081EA4CDA20000A28C /* TimelineFakeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA071EA4CDA20000A28C /* TimelineFakeModel.swift */; };
+		6649AA0C1EA4CF460000A28C /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA0B1EA4CF460000A28C /* Extensions.swift */; };
+		6649AA0F1EA4CF880000A28C /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA0E1EA4CF880000A28C /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6649A9E61EA360D80000A28C /* Sekouad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sekouad.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		6649A9E91EA360D80000A28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		6649A9E91EA360D80000A28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = Skel/AppDelegate.swift; sourceTree = "<group>"; };
 		6649A9EE1EA360D80000A28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6649A9F01EA360D80000A28C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6649A9F31EA360D80000A28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6649A9F51EA360D80000A28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		6649A9FB1EA361D60000A28C /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
-		6649A9FD1EA362B60000A28C /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
-		6649A9FF1EA3641A0000A28C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
-		6649AA011EA364250000A28C /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
-		6649AA031EA378730000A28C /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
-		6649AA051EA3DE6C0000A28C /* CameraResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraResultViewController.swift; sourceTree = "<group>"; };
+		6649A9FB1EA361D60000A28C /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RootViewController.swift; path = Skel/RootViewController.swift; sourceTree = "<group>"; };
+		6649A9FD1EA362B60000A28C /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HomePageViewController.swift; path = Skel/HomePageViewController.swift; sourceTree = "<group>"; };
+		6649A9FF1EA3641A0000A28C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Camera/CameraViewController.swift; sourceTree = "<group>"; };
+		6649AA011EA364250000A28C /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineViewController.swift; path = Timeline/TimelineViewController.swift; sourceTree = "<group>"; };
+		6649AA031EA378730000A28C /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineTableViewCell.swift; path = Timeline/TimelineTableViewCell.swift; sourceTree = "<group>"; };
+		6649AA051EA3DE6C0000A28C /* CameraResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraResultViewController.swift; path = Camera/CameraResultViewController.swift; sourceTree = "<group>"; };
+		6649AA071EA4CDA20000A28C /* TimelineFakeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TimelineFakeModel.swift; path = Timeline/TimelineFakeModel.swift; sourceTree = "<group>"; };
+		6649AA0B1EA4CF460000A28C /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Extensions.swift; path = Misc/Extensions.swift; sourceTree = "<group>"; };
+		6649AA0E1EA4CF880000A28C /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = Misc/Notifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,18 +71,45 @@
 			isa = PBXGroup;
 			children = (
 				6649A9E91EA360D80000A28C /* AppDelegate.swift */,
-				6649A9ED1EA360D80000A28C /* Main.storyboard */,
-				6649AA031EA378730000A28C /* TimelineTableViewCell.swift */,
-				6649A9FF1EA3641A0000A28C /* CameraViewController.swift */,
-				6649AA011EA364250000A28C /* TimelineViewController.swift */,
+				6649A9FD1EA362B60000A28C /* HomePageViewController.swift */,
 				6649A9FB1EA361D60000A28C /* RootViewController.swift */,
+				6649A9ED1EA360D80000A28C /* Main.storyboard */,
+				6649AA091EA4CEEF0000A28C /* Timeline */,
+				6649AA0A1EA4CEF90000A28C /* Camera */,
+				6649AA0D1EA4CF4B0000A28C /* Misc */,
 				6649A9F01EA360D80000A28C /* Assets.xcassets */,
-				6649AA051EA3DE6C0000A28C /* CameraResultViewController.swift */,
 				6649A9F21EA360D80000A28C /* LaunchScreen.storyboard */,
 				6649A9F51EA360D80000A28C /* Info.plist */,
-				6649A9FD1EA362B60000A28C /* HomePageViewController.swift */,
 			);
 			path = Sekouad;
+			sourceTree = "<group>";
+		};
+		6649AA091EA4CEEF0000A28C /* Timeline */ = {
+			isa = PBXGroup;
+			children = (
+				6649AA031EA378730000A28C /* TimelineTableViewCell.swift */,
+				6649AA011EA364250000A28C /* TimelineViewController.swift */,
+				6649AA071EA4CDA20000A28C /* TimelineFakeModel.swift */,
+			);
+			name = Timeline;
+			sourceTree = "<group>";
+		};
+		6649AA0A1EA4CEF90000A28C /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				6649A9FF1EA3641A0000A28C /* CameraViewController.swift */,
+				6649AA051EA3DE6C0000A28C /* CameraResultViewController.swift */,
+			);
+			name = Camera;
+			sourceTree = "<group>";
+		};
+		6649AA0D1EA4CF4B0000A28C /* Misc */ = {
+			isa = PBXGroup;
+			children = (
+				6649AA0B1EA4CF460000A28C /* Extensions.swift */,
+				6649AA0E1EA4CF880000A28C /* Notifications.swift */,
+			);
+			name = Misc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -152,7 +185,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6649AA0F1EA4CF880000A28C /* Notifications.swift in Sources */,
 				6649A9FC1EA361D60000A28C /* RootViewController.swift in Sources */,
+				6649AA0C1EA4CF460000A28C /* Extensions.swift in Sources */,
+				6649AA081EA4CDA20000A28C /* TimelineFakeModel.swift in Sources */,
 				6649AA001EA3641A0000A28C /* CameraViewController.swift in Sources */,
 				6649A9EA1EA360D80000A28C /* AppDelegate.swift in Sources */,
 				6649A9FE1EA362B60000A28C /* HomePageViewController.swift in Sources */,
