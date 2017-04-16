@@ -83,7 +83,7 @@ class CameraViewController: UIViewController {
             else if (cameraSession.canAddInput(deviceInput) == true) {
                 cameraSession.addInput(deviceInput)
             }
-            
+
             if dataOutput == nil {
                 dataOutput = AVCapturePhotoOutput()
                 if (cameraSession.canAddOutput(dataOutput!) == true) {
@@ -118,6 +118,12 @@ class CameraViewController: UIViewController {
             let fileName = "mysavefile.mp4";
             let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
             let filePath = documentsURL.appendingPathComponent(fileName)
+            
+            let movieFileOutputConnection = videoFileOutput?.connection(withMediaType: AVMediaTypeVideo)
+            //flip video output if front facing camera is selected
+            if self.captureDevicePosition == .front {
+                movieFileOutputConnection?.isVideoMirrored = true
+            }
             
             videoFileOutput?.startRecording(toOutputFileURL: filePath, recordingDelegate: self)
         } else if action == "stop" {
@@ -157,7 +163,8 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
             let data = AVCapturePhotoOutput.jpegPhotoDataRepresentation(forJPEGSampleBuffer: photoSampleBuffer!,
                                                                         previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             let image = UIImage(data: data!)
-            displayResult(.photo(image: image!))
+            let flippedImage = UIImage(cgImage: image!.cgImage!, scale: image!.scale, orientation: .leftMirrored)
+            displayResult(.photo(image: flippedImage))
         }
     }
 }

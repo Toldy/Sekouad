@@ -55,9 +55,9 @@ class CameraResultViewController: UIViewController {
     
     func playVideo(_ url: URL){
         let f = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
-        
         let player = AVPlayer(url: url)
         let playerLayer = AVPlayerLayer(player: player)
+
         playerLayer.frame = f
         playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
         
@@ -67,20 +67,15 @@ class CameraResultViewController: UIViewController {
             player.play()
         }
         
-//        NotificationCenter.default.addObserver(self,
-//                                               selector: #selector(playerItemDidReachEnd),
-//                                               name: NSNotification.Name.AVPlayerItemDidPlayToEndTime,
-//                                               object: player.currentItem)
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: nil, queue: nil) { notification in
+            player.seek(to: kCMTimeZero)
+            player.play()
+        }
     }
-    
-//    func playerItemDidReachEnd(notification: NSNotification) {
-//        if let player: AVPlayerItem = notification.object as? AVPlayerItem {
-//            player.seek(to: kCMTimeZero)
-//        }
-//    }
 }
 
 // Video saving
+
 extension CameraResultViewController {
     
     func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject) {

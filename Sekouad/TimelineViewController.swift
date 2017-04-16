@@ -53,8 +53,6 @@ class TimelineViewController: UIViewController {
 
         tableView.delegate = self
         tableView.dataSource = self
-        
-        tableView.backgroundColor = .clear
     }
 }
 
