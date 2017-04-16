@@ -63,6 +63,8 @@ class CameraViewController: UIViewController {
     }()
     
     var dataOutput: AVCapturePhotoOutput?
+    var videoFileOutput: AVCaptureMovieFileOutput?
+    
     
     func setupCameraSession() {
         let captureDevice = AVCaptureDevice.defaultDevice(withDeviceType: .builtInWideAngleCamera, mediaType: AVMediaTypeVideo, position: captureDevicePosition)
@@ -89,6 +91,12 @@ class CameraViewController: UIViewController {
                 }
             }
             
+            if videoFileOutput == nil {
+                videoFileOutput = AVCaptureMovieFileOutput()
+                if cameraSession.canAddOutput(videoFileOutput!) {
+                    cameraSession.addOutput(videoFileOutput!)
+                }
+            }
             cameraSession.commitConfiguration()
         }
         catch let error as NSError {
@@ -103,13 +111,17 @@ class CameraViewController: UIViewController {
         }
     }
     
-    func recordVideo() {
-        guard let targetPage = notification.userInfo!["action"] as? Int else { return }
+    func recordVideo(_ notification: NSNotification) {
+        guard let action = notification.userInfo!["action"] as? String else { return }
         
         if action == "start" {
-            dataOutput.st
-        } else if action == "stop" {
+            let fileName = "mysavefile.mp4";
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
+            let filePath = documentsURL.appendingPathComponent(fileName)
             
+            videoFileOutput?.startRecording(toOutputFileURL: filePath, recordingDelegate: self)
+        } else if action == "stop" {
+            videoFileOutput?.stopRecording()
         }
         
         let captureSettings = AVCapturePhotoSettings()
@@ -131,6 +143,43 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
                                                                         previewPhotoSampleBuffer: previewPhotoSampleBuffer)
             let image = UIImage(data: data!)
             UIImageWriteToSavedPhotosAlbum(image!, nil, nil, nil)
+        }
+    }
+}
+
+extension CameraViewController: AVCaptureFileOutputRecordingDelegate {
+    func capture(_ captureOutput: AVCaptureFileOutput!, didFinishRecordingToOutputFileAt outputFileURL: URL!, fromConnections connections: [Any]!, error: Error!) {
+        print("capture did finish")
+        print(captureOutput)
+        print(outputFileURL)
+        playVideo(outputFileURL)
+        if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(outputFileURL.path) {
+            UISaveVideoAtPathToSavedPhotosAlbum(outputFileURL.path, self, #selector(CameraViewController.video(videoPath:didFinishSavingWithError:contextInfo:)), nil)
+        }
+    }
+    
+    func playVideo(_ url: URL){
+        let f = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height)
+        
+        let player = AVPlayer(url: url)
+        let playerLayer = AVPlayerLayer(player: player)
+        playerLayer.frame = f
+        playerLayer.videoGravity = AVLayerVideoGravityResizeAspectFill
+        
+        self.view.layer.addSublayer(playerLayer)
+        
+        DispatchQueue.main.async {
+            player.play()
+        }
+        
+    }
+    
+    func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject)
+    {
+        if let _ = error {
+            print("Error,Video failed to save")
+        }else{
+            print("Successfully,Video was saved")
         }
     }
 }

@@ -62,11 +62,11 @@ class RootViewController: UIViewController {
     
     @IBAction func mainButtonLongPressAction(_ sender: UILongPressGestureRecognizer) {
         if sender.state == .began {
-            NotificationCenter.default.post(name: SekouadeNotification.takePicture.rawValue,
+            NotificationCenter.default.post(name: SekouadeNotification.record.rawValue,
                                             object: nil, userInfo: ["action": "start"])
         }
         else if sender.state == .ended {
-            NotificationCenter.default.post(name: SekouadeNotification.takePicture.rawValue,
+            NotificationCenter.default.post(name: SekouadeNotification.record.rawValue,
                                             object: nil, userInfo: ["action": "stop"])
         }
     }
