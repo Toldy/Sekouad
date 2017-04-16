@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		6649A9EA1EA360D80000A28C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649A9E91EA360D80000A28C /* AppDelegate.swift */; };
-		6649A9EC1EA360D80000A28C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649A9EB1EA360D80000A28C /* ViewController.swift */; };
 		6649A9EF1EA360D80000A28C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6649A9ED1EA360D80000A28C /* Main.storyboard */; };
 		6649A9F11EA360D80000A28C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6649A9F01EA360D80000A28C /* Assets.xcassets */; };
 		6649A9F41EA360D80000A28C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6649A9F21EA360D80000A28C /* LaunchScreen.storyboard */; };
+		6649A9FC1EA361D60000A28C /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649A9FB1EA361D60000A28C /* RootViewController.swift */; };
+		6649A9FE1EA362B60000A28C /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649A9FD1EA362B60000A28C /* HomePageViewController.swift */; };
+		6649AA001EA3641A0000A28C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649A9FF1EA3641A0000A28C /* CameraViewController.swift */; };
+		6649AA021EA364250000A28C /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA011EA364250000A28C /* TimelineViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6649A9E61EA360D80000A28C /* Sekouad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sekouad.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6649A9E91EA360D80000A28C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		6649A9EB1EA360D80000A28C /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		6649A9EE1EA360D80000A28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6649A9F01EA360D80000A28C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6649A9F31EA360D80000A28C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6649A9F51EA360D80000A28C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6649A9FB1EA361D60000A28C /* RootViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		6649A9FD1EA362B60000A28C /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
+		6649A9FF1EA3641A0000A28C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		6649AA011EA364250000A28C /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,11 +61,14 @@
 			isa = PBXGroup;
 			children = (
 				6649A9E91EA360D80000A28C /* AppDelegate.swift */,
-				6649A9EB1EA360D80000A28C /* ViewController.swift */,
 				6649A9ED1EA360D80000A28C /* Main.storyboard */,
+				6649A9FF1EA3641A0000A28C /* CameraViewController.swift */,
+				6649AA011EA364250000A28C /* TimelineViewController.swift */,
+				6649A9FB1EA361D60000A28C /* RootViewController.swift */,
 				6649A9F01EA360D80000A28C /* Assets.xcassets */,
 				6649A9F21EA360D80000A28C /* LaunchScreen.storyboard */,
 				6649A9F51EA360D80000A28C /* Info.plist */,
+				6649A9FD1EA362B60000A28C /* HomePageViewController.swift */,
 			);
 			path = Sekouad;
 			sourceTree = "<group>";
@@ -137,8 +146,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6649A9EC1EA360D80000A28C /* ViewController.swift in Sources */,
+				6649A9FC1EA361D60000A28C /* RootViewController.swift in Sources */,
+				6649AA001EA3641A0000A28C /* CameraViewController.swift in Sources */,
 				6649A9EA1EA360D80000A28C /* AppDelegate.swift in Sources */,
+				6649A9FE1EA362B60000A28C /* HomePageViewController.swift in Sources */,
+				6649AA021EA364250000A28C /* TimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
