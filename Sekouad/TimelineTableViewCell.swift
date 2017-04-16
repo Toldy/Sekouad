@@ -10,11 +10,13 @@ import UIKit
 
 class TimelineTableViewCell: UITableViewCell {
 
-    @IBOutlet var thumbnailImageView: UIImageView!
-    @IBOutlet var titleLabel: UILabel!
-    @IBOutlet var timeLabel: UILabel!
-    @IBOutlet var categoryImageView: UIImageView!
-    @IBOutlet var categoryLabel: UILabel!
+    @IBOutlet weak var thumbnailImageView: UIImageView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var timeLabel: UILabel!
+    @IBOutlet weak var categoryImageView: UIImageView!
+    @IBOutlet weak var moreButton: UIButton!
+    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet weak var separatorView: UIView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -27,7 +29,7 @@ class TimelineTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func setup(sekouad: Sekouad) {
+    func setup(sekouad: Sekouad, indexPath: IndexPath) {
         titleLabel.text = sekouad.title
         timeLabel.text = sekouad.lastUpdate
         categoryLabel.text = sekouad.emoji
@@ -36,6 +38,16 @@ class TimelineTableViewCell: UITableViewCell {
         // Rounded thumbnail
         thumbnailImageView.layer.cornerRadius = thumbnailImageView.frame.width / 2
         thumbnailImageView.clipsToBounds = true
+        
+        // Hide separator under header view
+        if indexPath.row == 0 {
+            separatorView.isHidden = true
+        }
+        
+        // Hide more button more sekouads other than ours
+        if indexPath.section != 0 {
+            moreButton.isHidden = true
+        }
     }
 
 }

@@ -24,7 +24,7 @@ class Sekouad {
 
 class TimelineModel {
     
-    let sections = ["Perso", "Recents", "Populaires"]
+    let sections = ["Perso", "Récents", "Populaires"]
     let sekouads = [
         [Sekouad(title: "BritneyFans", lastUpdate: "5 min", emoji: "👯", thumbnail: 1), Sekouad(title: "PTDR", lastUpdate: "9 min", emoji: "😂", thumbnail: 2)],
         [Sekouad(title: "Wonderboys", lastUpdate: "5 min", emoji: "🦄", thumbnail: 1), Sekouad(title: "Devildu92", lastUpdate: "9 min", emoji: "😵", thumbnail: 2), Sekouad(title: "Avocado", lastUpdate: "1 h", emoji: "🥑", thumbnail: 3)],
@@ -72,7 +72,7 @@ extension TimelineViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineCellReuseIdentifier", for: indexPath) as! TimelineTableViewCell
         
         let sekouad = model.sekouads[indexPath.section][indexPath.row]
-        cell.setup(sekouad: sekouad)
+        cell.setup(sekouad: sekouad, indexPath: indexPath)
         
         return cell
     }
@@ -96,18 +96,14 @@ extension TimelineViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.backgroundColor = .green
-        
         return footerView.copyView()
-//        return view
     }
 }
 
 //MARK: - UIView Extensions
 
-extension UIView
-{
+extension UIView {
+    
     func copyView<T: UIView>() -> T {
         return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
     }
