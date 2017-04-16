@@ -15,6 +15,7 @@
 		6649A9FE1EA362B60000A28C /* HomePageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649A9FD1EA362B60000A28C /* HomePageViewController.swift */; };
 		6649AA001EA3641A0000A28C /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649A9FF1EA3641A0000A28C /* CameraViewController.swift */; };
 		6649AA021EA364250000A28C /* TimelineViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA011EA364250000A28C /* TimelineViewController.swift */; };
+		6649AA041EA378730000A28C /* TimelineTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6649AA031EA378730000A28C /* TimelineTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 		6649A9FD1EA362B60000A28C /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		6649A9FF1EA3641A0000A28C /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		6649AA011EA364250000A28C /* TimelineViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineViewController.swift; sourceTree = "<group>"; };
+		6649AA031EA378730000A28C /* TimelineTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TimelineTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 			children = (
 				6649A9E91EA360D80000A28C /* AppDelegate.swift */,
 				6649A9ED1EA360D80000A28C /* Main.storyboard */,
+				6649AA031EA378730000A28C /* TimelineTableViewCell.swift */,
 				6649A9FF1EA3641A0000A28C /* CameraViewController.swift */,
 				6649AA011EA364250000A28C /* TimelineViewController.swift */,
 				6649A9FB1EA361D60000A28C /* RootViewController.swift */,
@@ -150,6 +153,7 @@
 				6649AA001EA3641A0000A28C /* CameraViewController.swift in Sources */,
 				6649A9EA1EA360D80000A28C /* AppDelegate.swift in Sources */,
 				6649A9FE1EA362B60000A28C /* HomePageViewController.swift in Sources */,
+				6649AA041EA378730000A28C /* TimelineTableViewCell.swift in Sources */,
 				6649AA021EA364250000A28C /* TimelineViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -8,28 +8,107 @@
 
 import UIKit
 
+class Sekouad {
+    var title: String
+    var lastUpdate: String
+    var emoji: String
+    var thumbnail: String?
+    
+    init(title: String, lastUpdate: String, emoji: String, thumbnail: Int) {
+        self.title = title
+        self.lastUpdate = lastUpdate
+        self.emoji = emoji
+        self.thumbnail = "thumbnail-\(thumbnail)"
+    }
+}
+
+class TimelineModel {
+    
+    let sections = ["Perso", "Recents", "Populaires"]
+    let sekouads = [
+        [Sekouad(title: "BritneyFans", lastUpdate: "5 min", emoji: "👯", thumbnail: 1), Sekouad(title: "PTDR", lastUpdate: "9 min", emoji: "😂", thumbnail: 2)],
+        [Sekouad(title: "Wonderboys", lastUpdate: "5 min", emoji: "🦄", thumbnail: 1), Sekouad(title: "Devildu92", lastUpdate: "9 min", emoji: "😵", thumbnail: 2), Sekouad(title: "Avocado", lastUpdate: "1 h", emoji: "🥑", thumbnail: 3)],
+        [Sekouad(title: "BlueTeam", lastUpdate: "1 h", emoji: "🥑", thumbnail: 4), Sekouad(title: "Oreo", lastUpdate: "5 min", emoji: "🍿", thumbnail: 4), Sekouad(title: "Fitness", lastUpdate: "23 h", emoji: "💪", thumbnail: 1)]
+    ]
+}
+
+class HeaderView: UIView {
+    @IBOutlet var titleLabel: UILabel!
+}
+
 class TimelineViewController: UIViewController {
 
+    @IBOutlet var tableView: UITableView!
+    @IBOutlet var footerView: UIView!
+    @IBOutlet var headerView: HeaderView!
+
+    let model = TimelineModel()
+    
+    @IBAction func addSekouad(_ sender: Any) {
+        print("addSekouad")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        tableView.backgroundColor = .clear
     }
+}
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+extension TimelineViewController: UITableViewDataSource {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return model.sections.count
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return model.sekouads[section].count
     }
-    */
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "TimelineCellReuseIdentifier", for: indexPath) as! TimelineTableViewCell
+        
+        let sekouad = model.sekouads[indexPath.section][indexPath.row]
+        cell.setup(sekouad: sekouad)
+        
+        return cell
+    }
+}
 
+extension TimelineViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return headerView.bounds.height
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return footerView.bounds.height
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let sectionName = model.sections[section]
+        
+        headerView.titleLabel.text = sectionName
+        return headerView.copyView()
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view = UIView()
+        view.backgroundColor = .green
+        
+        return footerView.copyView()
+//        return view
+    }
+}
+
+//MARK: - UIView Extensions
+
+extension UIView
+{
+    func copyView<T: UIView>() -> T {
+        return NSKeyedUnarchiver.unarchiveObject(with: NSKeyedArchiver.archivedData(withRootObject: self)) as! T
+    }
 }
