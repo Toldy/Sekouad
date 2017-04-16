@@ -117,35 +117,38 @@ extension HomePageViewController: UIPageViewControllerDelegate {
 extension HomePageViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width {
-            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
-        } else if currentIndex == orderedViewControllers.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width {
-            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
-        } else {
-            
+//        if currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width {
+//            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+//        } else if currentIndex == orderedViewControllers.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width {
+//            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+//        } else {
+        
             if currentIndex == 0 {
                 let camera = orderedViewControllers.first! as! CameraViewController
                 var frame = camera.view.frame
                 frame.origin.x = scrollView.contentOffset.x - scrollView.bounds.size.width
                 camera.view.frame = frame
                 
-                                var percentage = frame.origin.x / scrollView.bounds.size.width
-//                                camera.blurredBackgroundView.alpha = percentage
-                //                print(percentage)
+                var percentage = frame.origin.x / scrollView.bounds.size.width
+                camera.blurredEffectView.alpha = percentage
             } else {
-                var frame = orderedViewControllers.first!.view.frame
+                let camera = orderedViewControllers.first! as! CameraViewController
+                var frame = camera.view.frame
                 frame.origin.x = scrollView.contentOffset.x
-                orderedViewControllers.first!.view.frame = frame
+                camera.view.frame = frame
+                
+                var percentage = frame.origin.x / scrollView.bounds.size.width
+                camera.blurredEffectView.alpha = percentage
             }
-        }
+//        }
     }
     
-    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
-        if currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width {
-            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
-        } else if currentIndex == orderedViewControllers.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width {
-            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
-        }
-    }
-    
+//    func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+//        if currentIndex == 0 && scrollView.contentOffset.x < scrollView.bounds.size.width {
+//            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+//        } else if currentIndex == orderedViewControllers.count - 1 && scrollView.contentOffset.x > scrollView.bounds.size.width {
+//            scrollView.contentOffset = CGPoint(x: scrollView.bounds.size.width, y: 0)
+//        }
+//    }
+
 }
