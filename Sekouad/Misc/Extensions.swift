@@ -28,6 +28,30 @@ extension UIView {
     }
 }
 
+// Quick toast without libs to display messages
+extension UIView {
+    
+    func makeToast(message: String) {
+        let labelFrame = CGRect(x: self.bounds.width / 2 - 75, y: self.bounds.height - 100,
+                                width: 150, height: 35)
+        let label = UILabel(frame: labelFrame)
+        label.text = message
+
+        // Fast design and transition
+        label.backgroundColor = UIColor(white: 0, alpha: 0.5)
+        label.textColor = .white
+        label.layer.cornerRadius = 10
+        label.textAlignment = .center
+        label.clipsToBounds = true
+        self.addSubview(label)
+        UIView.animate(withDuration: 0.4, delay: 2, animations: {
+            label.alpha = 0
+        }) { _ in
+            label.removeFromSuperview()
+        }
+    }
+}
+
 // Easy instantiation
 extension UIViewController {
     

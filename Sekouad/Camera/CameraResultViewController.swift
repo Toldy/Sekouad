@@ -11,6 +11,7 @@ import AVFoundation
 
 class CameraResultViewController: UIViewController {
 
+    // Mandatory VC setting
     var contentType: ContentType!
     
     @IBOutlet weak var closeButton: UIButton!
@@ -26,6 +27,7 @@ class CameraResultViewController: UIViewController {
         switch contentType! {
         case .photo(let image):
             UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+            view.makeToast(message: "📷  Saved !")
         case .video(let url):
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(url.path) {
                 UISaveVideoAtPathToSavedPhotosAlbum(url.path, self,
@@ -47,7 +49,6 @@ class CameraResultViewController: UIViewController {
             resultImageView.isHidden = true
             resultVideoView.isHidden = false
             playVideo(url)
-            print()
         }
         closeButton.addShadow()
         downloadButton.addShadow()
@@ -78,13 +79,14 @@ class CameraResultViewController: UIViewController {
 
 extension CameraResultViewController {
     
-    // Display a toast instead
     func video(videoPath: NSString, didFinishSavingWithError error: NSError?, contextInfo info: AnyObject) {
+        var infoMessage = ""
         if let e = error {
-            print("Video saving error: \(e)")
+            infoMessage = "😭  Error: \(e)"
         } else {
-            print("Video Successfully saved !")
+            infoMessage = "🎬  Saved !"
         }
+        view.makeToast(message: infoMessage)
     }
     
 }

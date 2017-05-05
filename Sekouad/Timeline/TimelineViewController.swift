@@ -21,6 +21,7 @@ class TimelineViewController: UIViewController {
     let model = TimelineFakeModel()
     
     @IBAction func addSekouad(_ sender: Any) {
+        view.makeToast(message: "Add Sekouad")
         print("addSekouad")
     }
     

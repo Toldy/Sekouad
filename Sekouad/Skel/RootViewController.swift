@@ -11,6 +11,7 @@ import UIKit
 class RootViewController: UIViewController {
 
     @IBOutlet weak var recordButton: UIButton!
+    @IBOutlet weak var recordingImageView: UIImageView!
     
     private var homePageViewController: HomePageViewController?
 
@@ -34,7 +35,7 @@ class RootViewController: UIViewController {
     
     @IBAction func mainButtonTouchAction() {
         // If current view is camera: Take picture
-        if homePageViewController?.currentIndex == 0 {
+        if homePageViewController?.page == 0 {
             NotificationCenter.default.post(name: SekouadeNotification.takePicture.rawValue,
                                             object: nil)
         } else {
@@ -45,13 +46,32 @@ class RootViewController: UIViewController {
     }
     
     @IBAction func mainButtonLongPressAction(_ sender: UILongPressGestureRecognizer) {
+
         if sender.state == .began {
             NotificationCenter.default.post(name: SekouadeNotification.record.rawValue,
                                             object: nil, userInfo: ["action": "start"])
+            
+            // Simple record animation start
+            UIView.animate(withDuration: 1, animations: {
+                self.recordButton.alpha = 0
+                self.recordingImageView.alpha = 1
+            })
+            let anim = CABasicAnimation(keyPath: "transform.scale")
+            anim.fromValue = 1
+            anim.toValue = 2
+            anim.duration = 1
+            anim.autoreverses = true
+            anim.repeatCount = Float.greatestFiniteMagnitude
+            recordingImageView.layer.add(anim, forKey: nil)
         }
         else if sender.state == .ended {
             NotificationCenter.default.post(name: SekouadeNotification.record.rawValue,
                                             object: nil, userInfo: ["action": "stop"])
+            // Simple record animation stop
+            UIView.animate(withDuration: 0.4, animations: {
+                self.recordButton.alpha = 1
+                self.recordingImageView.alpha = 0
+            })
         }
     }
 }
